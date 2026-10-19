@@ -1,0 +1,53 @@
+﻿{
+  "Cases": [
+    {
+      "Id": "C-1042",
+      "Client": "Andy Bernard",
+      "Type": "H-1B work visa",
+      "Form": "Form I-129",
+      "Stage": "Drafting",
+      "Receipt": "WAC2690012345",
+      "Employer": "ABC Tech Inc.",
+      "Attorney": "Andrew Fuller",
+      "Paralegal": "Stanley Hudson",
+      "ProgressStep": 1
+    },
+    {
+      "Id": "C-1043",
+      "Client": "Margaret Peacock",
+      "Type": "I-130 family petition",
+      "Form": "Form I-130",
+      "Stage": "Drafting",
+      "Receipt": "IOE0912345678",
+      "Employer": "Not applicable",
+      "Attorney": "Andrew Fuller",
+      "Paralegal": "Stanley Hudson",
+      "ProgressStep": 1
+    },
+    {
+      "Id": "C-1044",
+      "Client": "Steven Buchanan",
+      "Type": "N-400 citizenship",
+      "Form": "Form N-400",
+      "Stage": "Drafting",
+      "Receipt": "NBC1234567890",
+      "Employer": "Harbor Health Group",
+      "Attorney": "Andrew Fuller",
+      "Paralegal": "Stanley Hudson",
+      "ProgressStep": 0
+    }
+  ],
+  "Templates": [
+    {
+      "Key": "cover",
+      "Name": "USCIS cover letter",
+      "Note": "Sent with every filing"
+    },
+    {
+      "Key": "retainer",
+      "Name": "Retainer agreement",
+      "Note": "Signed when the client joins"
+    }
+  ],
+  "Documents": []
+}
