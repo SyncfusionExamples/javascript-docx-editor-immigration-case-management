@@ -1,144 +1,101 @@
-## Required README structure and writing rules
- 
-Use these sections in this order. Omit a section only when it genuinely does not apply; do not remove required sections merely because information is missing—instead add a short, honest note or a hidden HTML TODO comment for the maintainer.
- 
-### 1. Title - # javascript-docx-editor-immigration-case-management
- 
-- Use a clear, specific title that names the main sample use case.
-- Include the detected product and platform, for example: `Syncfusion React DOCX Editor – [Sample Use Case]` or `Syncfusion Angular DOCX Editor – [Sample Use Case]`.
-- Keep the title readable and do not stuff it with implementation details.
- 
-### 2. Introduction
- 
-- In one short paragraph, state what the sample demonstrates and who might use it.
-- Use the exact platform wording in the product name, including the trademark glyph where appropriate: `Syncfusion® React DOCX Editor`, `Syncfusion® Angular DOCX Editor`, and so on.
-- Hyperlink the product name or a nearby “product page” phrase to the configured platform product page, including the configured UTM parameters.
-- Describe only behavior confirmed by the source. Do not claim that an API, cloud service, or capability is provided unless the sample actually uses it.
- 
-### 3. Project Features
- 
-- Include roughly 3–6 short bullets covering only important, distinctive use cases and outcomes.
-- Explain what a user can do, not implementation minutiae.
-- Avoid lengthy package lists, generic framework features, marketing language, and claims not demonstrable in the sample.
- 
-### 4. Demo
- 
-- Use a screenshot for one main action or a single important result; use a GIF for a sequence of actions or an end-to-end workflow.
-- Prefer repository-owned assets in a location such as `assets/`, `docs/images/`, or `public/`. Confirm the exact file path and casing.
-- Give the image useful alt text. Use a relative path so the image renders in the GitHub repository.
-- Do not fabricate screenshots, GIFs, links, or hosted demos. If no media is present, add a hidden TODO comment describing the suggested asset and report the missing asset to the user outside the README. Never leave a visible broken image.
-- Add an online demo link only when a real, relevant demo URL is available and verified.
- 
-### 5. How to Run the Sample
- 
-Write for an end user who may not know the internals of this repository. Include only the prerequisites and commands supported by the checked-in project files.
- 
-When the project is client-only:
-1. State the required runtime/toolchain based on manifests and project configuration.
-2. Give the command to install dependencies from the correct directory.
-3. Give the actual command to start the client.
-4. State the local URL only if it is reliably defined or printed by the project's normal startup process; otherwise say to open the URL shown in the terminal.
- 
-When a Web API/backend is required:
-1. Clearly explain that the sample has a client and a backend, and whether both must run.
-2. Show the directory and command to start the backend using the actual project type and configuration.
-3. Explain how to configure the client to call the backend. Name the **real file path and setting/property** found in the repository, such as a `serviceUrl`, API base URL, environment variable, or configuration value. Include a safe example with placeholders only, for example `https://localhost:<port>/<api-route>/`.
-4. State whether the user must change the URL before starting the client. Do not guess a port, route, CORS policy, or protocol; confirm it from launch settings, server routes, and client code.
-5. Show the client install/start steps from its own directory.
-6. If the sample can run without the backend for some features, distinguish client-side features from backend-dependent features. Do not say a backend is optional when the sample's workflow requires it.
-7. Mention required public environment-variable names or non-secret configuration keys only when supported by the repository. Use placeholders for values and never print real credentials.
- 
-Keep steps numbered, ordered, and copyable. Avoid exposing internal deployment topology. Never publish internal hostnames or real infrastructure identifiers; use placeholders and tell the reader to provide their own configuration.
- 
-### 6. APIs Used
- 
-Include a Markdown table with these columns:
- 
+# Syncfusion® JavaScript DOCX Editor – Immigration Case Management
+
+## Introduction
+
+This sample demonstrates how the [Syncfusion® JavaScript DOCX Editor](https://www.syncfusion.com/document-editor/javascript) can be used to build an end-to-end immigration case document workflow. A law-firm-style application lets paralegals and attorneys pick an immigration case, generate a legal document from a template with case data merged into it, edit and review the document in the browser, save versioned copies to the case file, and export the final result as DOCX or PDF. The sample consists of a TypeScript webpack client and an ASP.NET Core Web API backend that performs the document processing (mail merge, DOCX save/load, and PDF conversion).
+
+## Project Features
+
+- Browse immigration cases and see each case's current workflow stage (template → paralegal edits → attorney review → save → export), with progress persisted on the server so a case resumes where it left off.
+- Generate a document from a case template, automatically merging case data (client, form type, receipt number, employer, attorney, paralegal, date) into the template's merge fields.
+- Edit and review the merged document in the full-featured DOCX Editor (ribbon and toolbar UI) directly in the browser.
+- Save documents to a case file with version history: every save stores a new DOCX version that can be reopened from the case's document list.
+- Export the finished document as a DOCX file or as a PDF for filing or sharing.
+
+## Demo
+
+<!-- TODO: Add a screenshot or GIF of the workflow under an assets/ or docs/images/ folder.
+     Suggested asset: a GIF showing case selection → template generation → editing in the
+     Document Editor → export to DOCX/PDF. No media asset is present in the repository yet. -->
+
+## How to Run the Sample
+
+This sample has two parts: a **client** (TypeScript + webpack, under `Client-Side/`) and a **backend** (ASP.NET Core Web API, under `Server-Side/`). Both must run — the document workflow (mail merge, save, export, PDF) is performed by the backend, and the client's Document Editor depends on it.
+
+### 1. Start the backend
+
+1. Ensure the .NET SDK targeting **.NET 10** is installed (the server project targets `net10.0`).
+2. From the `Server-Side/src` directory, restore and run the project:
+
+   ```bash
+   dotnet restore
+   dotnet run
+   ```
+
+   By default the server listens on `http://localhost:62870` (configured in `Server-Side/src/appsettings.json`, `urls`). The startup profile is defined in `Server-Side/src/Properties/launchSettings.json`.
+
+### 2. Configure the client to call the backend
+
+Open `Client-Side/src/app/app.ts` and check the two API base URLs at the top of the file:
+
+```ts
+const API_BASE = 'http://localhost:62870/api/documenteditor';
+const IMMIGRATION_API = 'http://localhost:62870/api/immigration';
+```
+
+If you changed the backend port or host, update these values to match (for example `http://localhost:<your-port>/api/...`) before starting the client. No other configuration is required; the backend enables cross-origin requests for the client.
+
+### 3. Start the client
+
+1. Ensure **Node.js** and **npm** are installed.
+2. From the `Client-Side` directory, install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the client:
+
+   ```bash
+   npm start
+   ```
+
+   Then open the local URL shown in the terminal output (webpack dev server).
+
+> **Note:** The client calls `registerLicense('Your Syncfusion License')` in `Client-Side/src/app/app.ts`. Replace that placeholder with your own Syncfusion license key.
+
+## APIs Used
+
 | API / Endpoint | HTTP Method | Purpose |
 |---|---|---|
- 
-Rules:
-- List the HTTP APIs that the **client project actually calls** and that are relevant to understanding/running this sample. Include the method (`GET`, `POST`, `PUT`, etc.) and a brief user-oriented description of each endpoint's purpose.
-- Use a relative route where possible (for example, `/api/documenteditor/import`) rather than embedding a development server's host or port.
- 
-- If the backend is included, cross-check routes and methods against its controller attributes/minimal API mappings. If only the client exists, derive method and route from the actual client request code.
-- Distinguish custom sample APIs from the Syncfusion DOCX Editor's configured document-processing service when both are used. Explain the role of each briefly.
-- Do not list ordinary local function calls or third-party SDK methods as HTTP APIs.
-- Do not infer the HTTP method from the endpoint name. If the method cannot be established, label it `Unconfirmed in source` or omit it and report the gap rather than guessing.
-- If the client makes no custom HTTP calls, state that no custom sample-specific Web APIs were identified. Do not invent an API table with fictional endpoints.
- 
-### 7. Resources
- 
-Add a concise list of relevant, verified links, as available:
-- **Product page:** use the configured platform-specific Syncfusion DOCX Editor product page.
-- **Documentation:** use the configured platform-specific official documentation.
-- **Online demo:** use the configured official demo URL, preferably the relevant sample route when a reliable route exists.
- 
-Use this label pattern, adapting the platform name and generated URLs:
- 
-```markdown
-# Resources
- 
-- **Product page:** [Syncfusion® React DOCX Editor](<configured-product-url-with-utm>)
-- **Documentation:** [Syncfusion® React DOCX Editor - Documentation](<configured-documentation-url-with-utm>)
-- **Online demo:** [Syncfusion® React DOCX Editor - Online demo](<configured-demo-url-with-utm>)
-```
- 
-Apply configured UTM parameters according to `utm_scope`. Remove empty or unverified entries and do not add unrelated links just to lengthen the section. Replace example platform labels and angle-bracket placeholders; never publish placeholders literally.
- 
-### 8. Support and feedback
- 
-Include this section when the configured official links are available. Use a concise, public-facing pattern such as:
- 
-- For questions, contact the [Syncfusion support team](SUPPORT_URL) or post in the [community forums](FORUM_URL).
-- Request a new feature through the [Syncfusion® feedback portal](FEEDBACK_URL).
- 
-Use this heading and concise format:
- 
-```markdown
-# Support and feedback
- 
-For any other queries, contact the [Syncfusion® support team](<support-url-with-utm>) or post your questions in the [community forums](<forum-url-with-utm>).
- 
-Request a new feature through the [Syncfusion® feedback portal](<feedback-url-with-utm>).
-```
- 
-Replace placeholders with generated links and apply UTM parameters according to `utm_scope`. If one of the links is not verified or configured, omit that link rather than inventing a URL. Never publish placeholders literally.
- 
-### 9. License
- 
-Use the configured EULA, purchase, and trial links with the configured UTM parameters. The recommended wording is defined in the **License wording** configuration above. Keep it short and neutral; do not paste the EULA or make legal claims beyond the linked source.
- 
-- If a repository `LICENSE` file exists, link to it using a relative path and describe it separately as the license for the sample source code.
-- Do not conflate the sample source-code license with the Syncfusion EULA.
-- Do not include a Syncfusion license key, environment value, customer identifier, or private licensing instructions.
- 
-## Public-safety rules — mandatory
- 
-The README must be safe to publish in a public GitHub repository. Never include any of the following, even if found in the source tree:
- 
-- API keys, access tokens, passwords, client secrets, private keys, certificates, connection strings, SAS tokens, bearer tokens, cookies, or license keys.
-- Real values copied from `.env`, secret stores, local user settings, deployment profiles, `appsettings` files, logs, request headers, or private configuration.
-- Private/internal hostnames, intranet URLs, non-public IPs, private repository links, or private service endpoints.
-- Confidential customer, tenant, account, subscription, storage, deployment, or employee information.
-- Request/response samples containing real user data, document contents, credentials, or personally identifiable information.
- 
-Additional rules:
-- Do not reveal a secret in README prose, Markdown code, HTML comments, screenshots, GIFs, or API examples.
-- Do not copy secret-looking values into the README simply because they are already committed in source control.
-- Use neutral placeholders such as `<your-api-base-url>`, `<your-port>`, or `<your-configuration-value>`; do not use realistic fake keys that could be mistaken for real credentials.
-- A public base URL may be documented only if it is intended for public use and verified. Otherwise use a placeholder and explain where the user supplies their own URL.
-- If a potential secret or confidential value is found in a source file, do not repeat its value. Finish the safe README where possible, then give the user a separate warning naming the affected file and (if useful) line number, without reproducing the sensitive content. Recommend removing it from public history and rotating/revoking it when appropriate. Do not modify source files unless asked.
-- Do not include internal architectural detail, debug logs, stack traces, private workarounds, or internal-only support instructions unless they are genuinely required for an end user's setup and are safe to publish.
- 
- 
-Just append the Resources, Support Feedback and License section for REACT projects :
-Resources
-Product page:   Syncfusion® React DOCX Editor 
-Documentation:   Syncfusion® React DOCX Editor - Documentation 
-Online demo:   Syncfusion® React DOCX Editor - Online demo 
-Support and feedback 
-For any other queries, reach our Syncfusion® support team or post the queries through the community forums. 
-Request new feature through Syncfusion® feedback portal. 
-License
-This is a commercial product and requires a paid license for possession or use Syncfusion's licensed software, including this component, is subject to the terms and conditions of Syncfusion's EULA. You can purchase a license here or start a free 30-day trial here. 
+| `/api/immigration/cases` | GET | Lists all immigration cases with their current stage. |
+| `/api/immigration/templates` | GET | Lists the document templates available for a case. |
+| `/api/immigration/cases/{caseId}/progress` | POST | Persists the workflow step so the case resumes and the home page shows the real stage. |
+| `/api/immigration/cases/{caseId}/documents/{templateKey}/generate` | POST | Merges case data into the template's merge fields and returns the document as SFDT for the editor. |
+| `/api/immigration/cases/{caseId}/documents/{templateKey}/open` | POST | Creates/opens a case document from the chosen template and returns SFDT. |
+| `/api/immigration/cases/{caseId}/documents/{templateKey}/load` | GET | Loads the latest saved version of a case document into the editor. |
+| `/api/immigration/cases/{caseId}/documents/{templateKey}/save` | POST | Saves the editor's document as a new DOCX version in the case file. |
+| `/api/immigration/cases/{caseId}/documents` | GET | Lists all documents (with version history) saved to a case. |
+| `/api/immigration/cases/{caseId}/documents/{templateKey}/export` | GET | Downloads the saved document as a DOCX file. |
+| `/api/immigration/cases/{caseId}/documents/{templateKey}/export-pdf` | GET | Downloads the saved document as a PDF file. |
+| `/api/immigration/cases/{caseId}/documents/{templateKey}/print` | GET | Produces a print-ready version of the saved document. |
+
+The Document Editor component in the client is configured with a `serviceUrl` pointing at the backend's document-processing service (`/api/documenteditor`), which handles the editor's built-in server-side operations (such as spell-check and system-defined actions). The `/api/immigration/*` routes above are custom sample APIs implementing the case-management workflow.
+
+## Resources
+
+- **Product page:** [Syncfusion® JavaScript DOCX Editor](https://www.syncfusion.com/document-editor/javascript)
+- **Documentation:** [Syncfusion® JavaScript DOCX Editor - Documentation](https://ej2.syncfusion.com/documentation/document-editor/getting-started/)
+- **Online demo:** [Syncfusion® JavaScript DOCX Editor - Online demo](https://ej2.syncfusion.com/demos/#/fluent2/material3/document-editor/default.html)
+
+## Support and feedback
+
+For any other queries, reach our [Syncfusion® support team](https://support.syncfusion.com/) or post the queries through the [community forums](https://www.syncfusion.com/forums).
+
+Request new feature through the [Syncfusion® feedback portal](https://www.syncfusion.com/feedback).
+
+## License
+
+This is a commercial product and requires a paid license for possession or use. Syncfusion's licensed software, including this component, is subject to the terms and conditions of [Syncfusion's EULA](https://www.syncfusion.com/license). You can [purchase a license here](https://www.syncfusion.com/sales/products) or start a [free 30-day trial here](https://www.syncfusion.com/account/manage-trials/get-trial).
+
+The sample source code itself is licensed under the terms in `Client-Side/license` (see the repository files for details).
