@@ -9,7 +9,7 @@ import {
 // Registering Syncfusion license key
 import { registerLicense } from '@syncfusion/ej2-base';
 
-registerLicense('NxYtGyMROh0gHDMgDk1jWU9FaFxFVmFJfFVrRGNEfF5gdVBMYVlbRXFUQF1hT35adUViXH5bc3dVRmBaWkdz');
+registerLicense('Your Syncfusion License');
 
 // styles.css is bundled via the webpack entry (see webpack.config.js); no
 // side-effect import here so tsc --noEmit stays clean.
