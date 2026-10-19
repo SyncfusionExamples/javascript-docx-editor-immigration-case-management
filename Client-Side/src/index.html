@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Syncfusion JavaScript DOCX Editor Immigration case management — Case Documents</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Immigration case documents POC with the Syncfusion Document Editor" />
+    <link rel="shortcut icon" href="resources/favicon.ico" />
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="brand">Syncfusion JavaScript DOCX Editor Immigration case management<small>Case documents</small></div>
+        <div class="spacer"></div>
+        <span id="home-btn-slot"></span>
+    </header>
+
+    <!-- ============ Screen 1: Cases home ============ -->
+    <main id="home" class="home">
+        <h1>Cases</h1>
+        <p class="lead">Open a case to prepare its documents.</p>
+        <div class="table-wrap">
+            <table class="cases">
+                <thead>
+                    <tr>
+                        <th>Client</th>
+                        <th>Case type</th>
+                        <th>Case ID</th>
+                        <th>Stage</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="case-rows"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- ============ Screen 2: Document workspace ============ -->
+    <div id="work" class="work hidden">
+        <nav class="steps" id="steps" aria-label="Document steps"></nav>
+        <div class="layout">
+            <section class="editor">
+                <div id="doceditor" class="doceditor"></div>
+            </section>
+            <aside class="side">
+                <div class="side-body" id="side-body"></div>
+                <div class="info" id="info"></div>
+                <div class="footer-nav">
+                    <span id="prev-btn-slot"></span>
+                    <span id="next-btn-slot"></span>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <div id="workspace-empty" class="hidden"></div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+</body>
+
+</html>
