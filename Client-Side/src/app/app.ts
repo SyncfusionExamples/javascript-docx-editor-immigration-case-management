@@ -343,7 +343,7 @@ function render(): void {
 
 function canNext(): boolean {
   if (!s) return false;
-  const gates = [s.generated, true, true, s.saved, s.exported];
+  const gates = [s.generated, true, true, s.saved, true];
   return gates[s.step];
 }
 
@@ -561,7 +561,6 @@ async function init(): Promise<void> {
   editor = new DocumentEditorContainer({
     enableToolbar: true,
     toolbarMode: 'Ribbon',
-    ribbonLayout: 'Classic',
     height: '100%',
     serviceUrl: API_BASE,
     currentUser: 'Meera Iyer',

@@ -14,9 +14,9 @@ This sample demonstrates how the [Syncfusion® JavaScript DOCX Editor](https://w
 
 ## Demo
 
-<!-- TODO: Add a screenshot or GIF of the workflow under an assets/ or docs/images/ folder.
-     Suggested asset: a GIF showing case selection → template generation → editing in the
-     Document Editor → export to DOCX/PDF. No media asset is present in the repository yet. -->
+![alt text](image.png)
+
+![alt text](image-1.png)
 
 ## How to Run the Sample
 
@@ -29,6 +29,7 @@ This sample has two parts: a **client** (TypeScript + webpack, under `Client-Sid
 
    ```bash
    dotnet restore
+   dotnet build
    dotnet run
    ```
 
@@ -57,7 +58,7 @@ If you changed the backend port or host, update these values to match (for examp
 3. Start the client:
 
    ```bash
-   npm start
+   npm run start
    ```
 
    Then open the local URL shown in the terminal output (webpack dev server).
@@ -76,9 +77,7 @@ If you changed the backend port or host, update these values to match (for examp
 | `/api/immigration/cases/{caseId}/documents/{templateKey}/load` | GET | Loads the latest saved version of a case document into the editor. |
 | `/api/immigration/cases/{caseId}/documents/{templateKey}/save` | POST | Saves the editor's document as a new DOCX version in the case file. |
 | `/api/immigration/cases/{caseId}/documents` | GET | Lists all documents (with version history) saved to a case. |
-| `/api/immigration/cases/{caseId}/documents/{templateKey}/export` | GET | Downloads the saved document as a DOCX file. |
-| `/api/immigration/cases/{caseId}/documents/{templateKey}/export-pdf` | GET | Downloads the saved document as a PDF file. |
-| `/api/immigration/cases/{caseId}/documents/{templateKey}/print` | GET | Produces a print-ready version of the saved document. |
+| `/api/documenteditor/ExportPdf` | POST | Converts the current editor document to PDF and returns it for download. |
 
 The Document Editor component in the client is configured with a `serviceUrl` pointing at the backend's document-processing service (`/api/documenteditor`), which handles the editor's built-in server-side operations (such as spell-check and system-defined actions). The `/api/immigration/*` routes above are custom sample APIs implementing the case-management workflow.
 
